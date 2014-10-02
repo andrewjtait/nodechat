@@ -1,4 +1,5 @@
-var express = require('express'),
+var gravatar = require('node-gravatar'),
+    express = require('express'),
     app = express(),
     http = require('http').Server(app),
     io = require('socket.io')(http);
@@ -12,7 +13,12 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   io.emit('register', socket.id);
   socket.on('chat message', function(msg){
-    io.emit('chat message', msg, this.id);
+    var avatar = gravatar.get(this.email, null, 40);
+    io.emit('chat message', msg, this.id, avatar);
+  });
+
+  socket.on('user setup', function(email) {
+    this.email = email;
   });
 });
 

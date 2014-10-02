@@ -6,23 +6,44 @@
     <link href="public/stylesheet.css" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form class="message-form" action="#">
-      <input class="message-input" autocomplete="off">
-      <button class="message-submit">Send</button>
-    </form>
+    <div class="setup">
+      <form class="setup-form" action="#">
+        <input class="email-address" autocomplete="off">
+        <button class="setup-submit">Go!</button>
+      </form>
+    </div>
+    <div class="chat-room hidden">
+      <ul id="messages"></ul>
+      <form class="message-form" action="#">
+        <input class="message-input" autocomplete="off">
+        <button class="message-submit">Send</button>
+      </form>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
+      $('.setup-form').on('submit', function(ev) {
+        ev.preventDefault();
+        var emailAddress = $('.email-address');
+        socket.emit('user setup', emailAddress.val());
+        startChatApp();
+      });
+
+      var startChatApp = function() {
+
+        $('.setup').addClass('hidden');
+        $('.chat-room').removeClass('hidden');
+
+        messageInput.focus();
+      };
+
       var socket = io(),
-          messageInput = $('.message-input'),
           messages = $('#messages'),
-          form = $('form');
+          messageForm = $('.message-form'),
+          messageInput = $('.message-input');
 
-      messageInput.focus();
-
-      form.submit(function(ev) {
+      messageForm.submit(function(ev) {
         ev.preventDefault();
         socket.emit('chat message', messageInput.val());
         messageInput.val('').focus();
@@ -34,14 +55,18 @@
         }
       });
 
-      socket.on('chat message', function(msg, id) {
+      socket.on('chat message', function(msg, id, avatar) {
         var klass = 'message';
 
         if (id == socket.id) {
           klass += ' me';
         }
 
-        messages.prepend($('<li class="' + klass + '">').text(msg));
+        var message = $('<li class="' + klass + '">').text(msg),
+            avatar = $('<img src="' + avatar + '">');
+
+        message.append(avatar);
+        messages.prepend(message);
       });
     </script>
   </body>
