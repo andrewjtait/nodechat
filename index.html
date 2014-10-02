@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href="public/stylesheet.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form class="message-form" action="#">
+      <input class="message-input" autocomplete="off">
+      <button class="message-submit">Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io(),
+          messageInput = $('.message-input'),
+          messages = $('#messages'),
+          form = $('form');
+
+      messageInput.focus();
+
+      form.submit(function(ev) {
+        ev.preventDefault();
+        socket.emit('chat message', messageInput.val());
+        messageInput.val('').focus();
+      });
+
+      socket.on('register', function(id) {
+        if (socket.id == null) {
+          socket.id = id;
+        }
+      });
+
+      socket.on('chat message', function(msg, id) {
+        var klass = 'message';
+
+        if (id == socket.id) {
+          klass += ' me';
+        }
+
+        messages.prepend($('<li class="' + klass + '">').text(msg));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: "HelveticaNeue", Helvetica, Arial;
+}
+
+.message-form {
+  background: #6CC644;
+  bottom: 0;
+  padding: 1px 0 0;
+  position: fixed;
+  width: 100%;
+}
+
+.message-input {
+  -webkit-border-radius: 0px;
+  border: 0;
+  font-size: 16px;
+  padding: 10px;
+  width: 80%; 
+  display: inline-block;
+}
+
+.message-input:focus {
+  outline: none;
+}
+
+.message-submit {
+  background: #6CC644;
+  border: none;
+  color: #FFF;
+  display: inline-block;
+  float: right;
+  font-size: 16px;
+  padding: 10px;
+  width: 20%;
+}
+
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 50px;
+  -webkit-align-content: flex-end;
+  display: -webkit-flex;
+  -webkit-flex-direction: column-reverse;
+  height: 100%
+}
+
+.message {
+  background: #FFF;
+  padding: 5px 10px;
+}
+
+.message.me {
+  text-align: right;
+}
