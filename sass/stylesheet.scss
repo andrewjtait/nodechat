@@ -1,0 +1,22 @@
+$green: #6CC644;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, .chat-room {
+  height: 100%;
+  font-family: "HelveticaNeue", Helvetica, Arial;
+}
+
+.hidden {
+  position: relative;
+  z-index: -1;
+}
+
+@import "avatar";
+@import "views";
+@import "forms";
+@import "messages";

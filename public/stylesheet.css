@@ -1,80 +1,82 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 html, body, .chat-room {
   height: 100%;
-  font-family: "HelveticaNeue", Helvetica, Arial;
-}
-
-img {
-  -webkit-border-radius: 100%;
-  top: -12px;
-  position: relative;
-  margin-right: 10px;
-  float: left;
-}
-
-.me img {
-  float: right;
-  margin-right: 0;
-  margin-left: 10px;
-}
+  font-family: "HelveticaNeue", Helvetica, Arial; }
 
 .hidden {
-  display: none;
-}
+  position: relative;
+  z-index: -1; }
 
-.message-form {
-  background: #6CC644;
+.avatar {
+  border-radius: 100%;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  top: -12px; }
+  .me .avatar {
+    float: right;
+    margin-right: 0;
+    margin-left: 10px; }
+
+.setup.hide {
+  transition: opacity 0.5s;
+  opacity: 0; }
+
+form {
+  background: #6cc644;
   bottom: 0;
-  padding: 1px 0 0;
   position: fixed;
-  width: 100%;
-}
+  width: 100%; }
+  form.setup-form {
+    background: #FFF;
+    top: 0;
+    margin-top: 0; }
+  form.boot-app {
+    top: 100%;
+    margin-top: -39px;
+    transition: top 0.5s, margin-top 0.5s; }
 
-.message-input {
-  -webkit-border-radius: 0px;
-  border: 0;
+input {
+  border-radius: 0px;
+  border: 1px solid #6cc644;
+  border-right: 0;
   font-size: 16px;
   padding: 10px;
-  width: 80%; 
-  display: inline-block;
-}
+  width: 80%;
+  display: inline-block; }
+  input:focus {
+    outline: none; }
 
-.message-input:focus {
-  outline: none;
-}
-
-.message-submit {
-  background: #6CC644;
-  border: none;
+button {
+  background: #6cc644;
+  border: 1px solid #6cc644;
   color: #FFF;
   display: inline-block;
   float: right;
   font-size: 16px;
   padding: 10px;
-  width: 20%;
-}
+  width: 20%; }
 
-#messages {
+.messages-container {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 39px; }
+  .messages-container td {
+    vertical-align: bottom; }
+
+.messages {
+  width: 100%;
   list-style-type: none;
   margin: 0;
-  padding: 0;
   padding-bottom: 50px;
-  -webkit-align-content: flex-end;
-  display: -webkit-flex;
-  -webkit-flex-direction: column-reverse;
-  height: 100%
-}
+  padding: 0; }
 
 .message {
   background: #FFF;
-  padding: 5px 10px;
-}
-
-.message.me {
-  text-align: right;
-}
+  padding: 15px 10px; }
+  .message.me {
+    text-align: right; }

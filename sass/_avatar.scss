@@ -1,0 +1,13 @@
+.avatar {
+  border-radius: 100%;
+  float: left;
+  margin-right: 10px;
+  position: relative;
+  top: -12px;
+
+  .me & {
+    float: right;
+    margin-right: 0;
+    margin-left: 10px;
+  }
+}

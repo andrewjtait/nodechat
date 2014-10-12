@@ -11,7 +11,10 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+  console.log('user connected');
+
   io.emit('register', socket.id);
+
   socket.on('chat message', function(msg){
     var avatar = gravatar.get(this.email, null, 40);
     io.emit('chat message', msg, this.id, avatar);

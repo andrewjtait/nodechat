@@ -1,4 +1,11 @@
 nodechat
 ========
 
-Simple chat application based on Node.js and socket.io - http://socket.io/get-started/chat/
+Simple chat application using Node.js and socket.io - http://socket.io/get-started/chat/
+
+## To Run:
+
+```
+$ npm install
+$ node app.js
+```
